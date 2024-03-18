@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const Advice = require("./src/models/adviceModel");
 const adviceRoutes = require("./src/routes/adviceRoutes");
 
 const app = express();
@@ -13,7 +12,7 @@ app.use(express.json());
 // Routes
 
 app.get("/", (req, res) => {
-  return res.status(200).send("advice generator app.");
+  return res.status(200).send("advice-generator-app REST API.");
 });
 
 app.use("/advice", adviceRoutes);
