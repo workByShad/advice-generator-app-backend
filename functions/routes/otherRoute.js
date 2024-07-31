@@ -4,7 +4,9 @@ const router = express.Router();
 
 // Routes
 router.route("/").get((req, res) => {
-  res.send("This is the /other route. You can also visit /advice.");
+  res.json({
+    message: "This is the /other route. You can also visit /advice.",
+  });
 });
 
 module.exports = router;

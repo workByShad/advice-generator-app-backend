@@ -4,6 +4,7 @@ const {
   postAdvice,
   getAdvice,
   deleteAdvice,
+  updateAdvice,
 } = require("../controllers/adviceController");
 
 const router = express.Router();
@@ -11,6 +12,6 @@ const router = express.Router();
 // Routes
 router.route("/").get(getAllAdvice).post(postAdvice);
 
-router.route("/:id").get(getAdvice).delete(deleteAdvice);
+router.route("/:id").get(getAdvice).delete(deleteAdvice).patch(updateAdvice);
 
 module.exports = router;

@@ -1,6 +1,5 @@
-const setData = async (docRef, adviceId, adviceText) => {
+const setData = async (docRef, adviceText) => {
   await docRef.set({
-    adviceId,
     adviceText,
   });
 };
