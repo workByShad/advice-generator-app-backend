@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // Routes
-router.route("/").get((req, res) => {
+router.route("/").all((req, res) => {
   res.json({
     message: "This is the /other route. You can also visit /advice.",
   });
