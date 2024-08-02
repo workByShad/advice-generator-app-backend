@@ -8,8 +8,10 @@ const middlewares = require("./middleware/middlewares");
 
 const baseRoute = require("./routes/baseRoute");
 const adviceRoute = require("./routes/adviceRoute");
-const otherRoute = require("./routes/otherRoute");
+const authRoute = require("./routes/authRoute");
 const attachFirestore = require("./middleware/attachFirestore");
+const fallback = require("./utils/noRouteFallback");
+const authenticate = require("./middleware/auth");
 
 // Initialize Firebase Admin
 initializeApp();
@@ -22,8 +24,10 @@ middlewares(app);
 
 // Routes
 app.use("/", baseRoute);
-app.use("/advice", attachFirestore, adviceRoute);
-app.use("/other", otherRoute);
+app.use("/advice", authenticate, attachFirestore, adviceRoute);
+app.use("/auth", authRoute);
+
+app.use("*", fallback);
 
 // Export the Express app as an HTTP function
 exports.api = onRequest(app);

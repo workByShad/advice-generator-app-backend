@@ -117,13 +117,6 @@ const deleteAdvice = async (req, res) => {
   }
 };
 
-// Fallback
-const fallback = (req, res) => {
-  res.json({
-    message: "route not set up.",
-  });
-};
-
 // Exports
 module.exports = {
   getAllAdvice,
@@ -131,5 +124,4 @@ module.exports = {
   postAdvice,
   deleteAdvice,
   updateAdvice,
-  fallback,
 };

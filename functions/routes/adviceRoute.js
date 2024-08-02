@@ -12,9 +12,7 @@ const router = express.Router();
 
 // Routes
 router.route("/").get(getAllAdvice).post(postAdvice);
-router.route("/").all(fallback);
 
 router.route("/:id").get(getAdvice).delete(deleteAdvice).patch(updateAdvice);
-router.route("/:id").all(fallback);
 
 module.exports = router;
