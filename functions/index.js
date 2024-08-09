@@ -9,6 +9,7 @@ const middlewares = require("./middleware/middlewares");
 const baseRoute = require("./routes/baseRoute");
 const adviceRoute = require("./routes/adviceRoute");
 const authRoute = require("./routes/authRoute");
+const testRoute = require("./routes/testRoute");
 const attachFirestore = require("./middleware/attachFirestore");
 const fallback = require("./utils/noRouteFallback");
 const authenticate = require("./middleware/auth");
@@ -24,8 +25,10 @@ middlewares(app);
 
 // Routes
 app.use("/", baseRoute);
-app.use("/advice", authenticate, attachFirestore, adviceRoute);
+app.use("/advice", /*authenticate,*/ attachFirestore, adviceRoute);
 app.use("/auth", authRoute);
+
+app.use("/test", testRoute);
 
 app.use("*", fallback);
 

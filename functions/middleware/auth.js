@@ -1,36 +1,23 @@
 const { getAuth } = require("firebase-admin/auth");
 
-const authenticate = /*async*/ (req, res, next) => {
-  //   const authorizationHeader = req.headers.authorization;
-  //     const authorizationHeader = req.headers;
-
-  //   console.log(authorizationHeader);
-
-  //   if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
-  //     return res.status(401).send("Unauthorized");
-  //   }
+const authenticate = async (req, res, next) => {
   const uid = req.headers.uid;
 
-  getAuth()
-    .getUser(uid)
-    .then((userRecord) => {
-      console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
-    })
-    .catch((error) => {
-      console.log("Error fetching user data:", error);
-    });
+  if (!uid) {
+    return res.status(400).json({ message: "Missing UID" });
+  }
 
-  // const idToken = authorizationHeader.split('Bearer ')[1];
+  try {
+    const userRecord = await getAuth().getUser(uid);
 
-  // try {
-  //   const decodedToken = await admin.auth().verifyIdToken(idToken);
-  //   req.user = decodedToken;
-  //   next();
-  // } catch (error) {
-  //   console.error('Error verifying token:', error);
-  //   res.status(401).send('Unauthorized');
-  // }
-  next();
+    console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+
+    next();
+  } catch (error) {
+    console.log("Error fetching user data:", error.message);
+
+    res.json({ message: "Unauthorised" });
+  }
 };
 
 module.exports = authenticate;
